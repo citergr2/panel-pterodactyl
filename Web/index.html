@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#171827">
+<title>Ruang Teduh — buat hati yang sedang ramai</title>
+<style>
+:root{--bg:#171827;--panel:rgba(255,255,255,.075);--line:rgba(255,255,255,.13);--text:#f7f2ff;--muted:#b9b5ca;--pink:#f2a9c7;--lav:#b8a9ef;--blue:#9fc9df}
+*{box-sizing:border-box}body{margin:0;min-height:100vh;color:var(--text);font-family:ui-rounded,"Segoe UI",system-ui,sans-serif;background:radial-gradient(ellipse at 15% 5%,#493657 0,transparent 38%),radial-gradient(ellipse at 90% 30%,#263e57 0,transparent 35%),linear-gradient(145deg,#171827,#20263b 65%,#29253b);overflow-x:hidden}
+body:before,body:after{content:"";position:fixed;border-radius:50%;filter:blur(70px);opacity:.25;pointer-events:none;z-index:-1}body:before{width:240px;height:240px;background:#d77eae;top:45%;left:-100px}body:after{width:280px;height:280px;background:#778fd0;right:-130px;bottom:0}
+.wrap{width:min(960px,92%);margin:auto;padding:34px 0 55px}.top{display:flex;justify-content:space-between;align-items:center;gap:12px;color:var(--muted);font-size:.9rem}.brand{letter-spacing:.12em;text-transform:uppercase;font-size:.72rem}.dot{display:inline-block;width:7px;height:7px;background:#9ed9c1;border-radius:50%;margin-right:7px;box-shadow:0 0 12px #9ed9c1}
+.hero{text-align:center;padding:70px 12px 36px}.moon{font-size:2.5rem;filter:drop-shadow(0 0 20px #e8c7ff);animation:float 5s ease-in-out infinite}.eyebrow{color:var(--pink);letter-spacing:.18em;text-transform:uppercase;font-size:.72rem;margin:20px 0 12px}.hero h1{font-family:Georgia,serif;font-weight:400;font-size:clamp(2.2rem,7vw,4.5rem);line-height:1.05;margin:0}.hero h1 em{color:#eab9d2;font-weight:400}.hero p{max-width:550px;margin:20px auto 0;color:var(--muted);line-height:1.8}
+.grid{display:grid;grid-template-columns:1.1fr .9fr;gap:17px}.card{background:var(--panel);border:1px solid var(--line);border-radius:24px;padding:24px;backdrop-filter:blur(16px);box-shadow:0 18px 55px #080a1825}.card h2{font-size:1.05rem;font-weight:600;margin:0 0 8px}.sub{color:var(--muted);font-size:.88rem;line-height:1.65;margin:0 0 18px}
+.moods{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}.mood{border:1px solid var(--line);background:#ffffff08;color:var(--text);padding:13px 12px;border-radius:15px;text-align:left;cursor:pointer;transition:.2s;font:inherit}.mood span{display:block;font-size:1.25rem;margin-bottom:5px}.mood small{color:var(--muted)}.mood:hover,.mood.active{border-color:#eab9d2;background:#eab9d21a;transform:translateY(-2px)}
+.player{text-align:center;display:flex;flex-direction:column;justify-content:space-between;min-height:100%}.orb{width:150px;height:150px;margin:12px auto 18px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#f5d7e8,#bb9bd7 38%,#657aa7 75%);box-shadow:0 0 35px #c79cdb55, inset -15px -18px 30px #33345b66;position:relative;animation:breathe 5s ease-in-out infinite}.orb:before,.orb:after{content:"";position:absolute;inset:-12px;border:1px solid #e8c7ff40;border-radius:50%;animation:ring 8s linear infinite}.orb:after{inset:-24px;animation-direction:reverse;opacity:.6}
+.now{color:var(--pink);font-size:.75rem;letter-spacing:.15em;text-transform:uppercase}.track{font-family:Georgia,serif;font-size:1.45rem;margin:7px 0}.desc{color:var(--muted);font-size:.85rem;min-height:40px;line-height:1.5}
+.controls{display:flex;justify-content:center;align-items:center;gap:12px;margin:17px 0}.control{border:1px solid var(--line);background:#ffffff12;color:var(--text);border-radius:50%;width:43px;height:43px;font-size:1rem;cursor:pointer}.play{width:58px;height:58px;background:linear-gradient(135deg,#e8b5d0,#b7a8ed);color:#252239;border:0;font-size:1.2rem;box-shadow:0 8px 25px #c79cdb44}.control:hover{transform:scale(1.06)}.volume{width:100%;accent-color:#e8b5d0}
+.note{margin-top:17px;padding:19px 21px;border-left:2px solid var(--pink);background:#ffffff08;border-radius:0 15px 15px 0;color:#e8dfed;line-height:1.75;font-family:Georgia,serif;font-size:1.02rem}
+.journal{margin-top:17px}.journal textarea{width:100%;min-height:95px;resize:vertical;border:1px solid var(--line);border-radius:14px;background:#11152266;color:var(--text);padding:13px;font:inherit;line-height:1.6;outline:none}.journal textarea:focus{border-color:#eab9d2}.journal textarea::placeholder{color:#aaa5ba}.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}.btn{border:1px solid var(--line);border-radius:999px;padding:10px 16px;background:#ffffff0d;color:var(--text);font:inherit;cursor:pointer}.btn.primary{background:#e8b5d0;color:#282338;border:0}.status{color:var(--muted);font-size:.8rem;margin-top:10px;min-height:18px}
+.footer{text-align:center;color:#9693aa;font-size:.8rem;line-height:1.7;margin:30px 0 0}.footer strong{color:#d8c1dd;font-weight:500}
+@keyframes float{50%{transform:translateY(-9px)}}@keyframes breathe{50%{transform:scale(1.06);filter:hue-rotate(12deg)}}@keyframes ring{to{transform:rotate(360deg)}}
+@media(max-width:700px){.hero{padding-top:52px}.grid{grid-template-columns:1fr}.player{min-height:420px}.card{padding:20px}.top{font-size:.78rem}}
+</style>
+</head>
+<body>
+<main class="wrap">
+  <div class="top"><div class="brand">✦ ruang teduh</div><div><span class="dot"></span>tempat singgah sebentar</div></div>
+  <header class="hero">
+    <div class="moon">☾</div>
+    <div class="eyebrow">untuk hati yang sedang ramai</div>
+    <h1>Pelan-pelan saja,<br><em>tak perlu pura-pura kuat.</em></h1>
+    <p>Kalau hari ini rasanya campur aduk, duduk sebentar di sini. Kamu nggak harus punya semua jawabannya malam ini.</p>
+  </header>
+
+  <section class="grid">
+    <div class="card">
+      <h2>Apa yang paling dekat dengan perasaanmu?</h2>
+      <p class="sub">Pilih yang paling terasa. Nggak harus pas, dan boleh berubah kapan saja.</p>
+      <div class="moods" id="moods">
+        <button class="mood active" data-mood="galau"><span>🌧️</span>Galau <small>pikiran ke mana-mana</small></button>
+        <button class="mood" data-mood="sedih"><span>🌙</span>Sedih <small>ingin menepi sebentar</small></button>
+        <button class="mood" data-mood="rindu"><span>💭</span>Rindu <small>ada yang masih teringat</small></button>
+        <button class="mood" data-mood="bingung"><span>🫧</span>Bingung <small>belum tahu harus apa</small></button>
+        <button class="mood" data-mood="tenang"><span>🌿</span>Ingin tenang <small>butuh napas lega</small></button>
+        <button class="mood" data-mood="semangat"><span>☀️</span>Mulai lagi <small>pelan-pelan bangkit</small></button>
+      </div>
+      <div class="note" id="message">Kadang yang bikin lelah bukan cuma kehilangan, tapi juga pertanyaan-pertanyaan yang belum punya jawaban. Nggak apa-apa kalau hari ini belum selesai.</div>
+      <div class="journal">
+        <h2 style="margin-top:22px">Titipkan sedikit isi kepala</h2>
+        <p class="sub">Tulis kalau mau. Catatan ini hanya ada di halaman selama masih terbuka; tidak dikirim atau disimpan.</p>
+        <textarea id="thought" placeholder="Hal yang paling ingin aku keluarkan sekarang adalah..."></textarea>
+        <div class="actions"><button class="btn primary" id="reflect">Beri aku kalimat pengingat</button><button class="btn" id="clear">Kosongkan</button></div>
+        <div class="status" id="reflection" aria-live="polite"></div>
+      </div>
+    </div>
+
+    <div class="card player">
+      <div>
+        <div class="now">original mood melody</div>
+        <div class="orb" aria-hidden="true"></div>
+        <div class="track" id="track">Hujan di Jendela</div>
+        <div class="desc" id="description">Melodi piano lembut, dibuat langsung oleh browser untuk menemani jeda.</div>
+      </div>
+      <div>
+        <div class="controls">
+          <button class="control" id="newMelody" title="Buat melodi baru" aria-label="Buat melodi baru">↻</button>
+          <button class="control play" id="play" title="Putar atau jeda" aria-label="Putar">▶</button>
+          <button class="control" id="tone" title="Ganti warna suara" aria-label="Ganti warna suara">♫</button>
+        </div>
+        <label class="sub" for="volume">Volume</label>
+        <input class="volume" id="volume" type="range" min="0" max="0.5" step="0.01" value="0.18">
+        <p class="status" id="audioStatus">Tekan putar untuk mulai. Suara dibuat langsung, tanpa file lagu.</p>
+      </div>
+    </div>
+  </section>
+  <footer class="footer">Kamu boleh punya perasaan yang rumit tanpa harus buru-buru mengambil keputusan.<br><strong>Jaga hati sendiri, dan tetap beri ruang untuk hati orang lain.</strong><br>♡ ruang teduh</footer>
+</main>
+<script>
+(() => {
+  const $ = id => document.getElementById(id);
+  const moodData = {
+    galau:{title:"Hujan di Jendela",desc:"Piano pelan dengan nada yang sedikit menggantung.",msg:"Kadang yang bikin lelah bukan cuma kehilangan, tapi juga pertanyaan-pertanyaan yang belum punya jawaban. Nggak apa-apa kalau hari ini belum selesai.",scale:[0,2,3,7,9],tempo:76},
+    sedih:{title:"Langit Setelah Hujan",desc:"Nada hangat yang memberi ruang untuk merasa.",msg:"Sedih bukan berarti kamu lemah. Kamu boleh mengakui bahwa sesuatu terasa berat, lalu beristirahat tanpa menyalahkan diri sendiri.",scale:[0,2,5,7,9],tempo:66},
+    rindu:{title:"Surat yang Tak Dikirim",desc:"Petikan lembut seperti kenangan yang lewat.",msg:"Merindukan seseorang tidak selalu berarti harus kembali atau melakukan sesuatu. Kadang cukup mengakui: iya, orang itu pernah berarti.",scale:[0,3,5,7,10],tempo:72},
+    bingung:{title:"Di Antara Dua Arah",desc:"Melodi sederhana yang bergerak pelan mencari jalan.",msg:"Kamu nggak harus memberi nama pada semua perasaan sekarang. Beri waktu. Keputusan yang baik biasanya datang saat pikiran sudah lebih jernih.",scale:[0,2,4,7,11],tempo:70},
+    tenang:{title:"Tempat untuk Bernapas",desc:"Nada ringan dan lapang untuk menenangkan pikiran.",msg:"Tarik napas pelan. Lepaskan bahu. Untuk beberapa menit ini, kamu tidak perlu menyelesaikan apa pun. Cukup hadir di sini.",scale:[0,2,4,7,9],tempo:84},
+    semangat:{title:"Pagi yang Baru",desc:"Pola nada lebih cerah, tetap lembut dan santai.",msg:"Kamu boleh mulai lagi dari langkah kecil. Nggak perlu langsung baik-baik saja; satu hal sederhana yang kamu lakukan hari ini sudah berarti.",scale:[0,2,4,7,9],tempo:96}
+  };
+  let mood="galau", audio=null, master=null, playing=false, timer=null, step=0, melody=[], instrument=0;
+  const names=["C","D","E♭","G","A"];
+  function makeMelody(){
+    const scale=moodData[mood].scale;
+    melody=Array.from({length:16},(_,i)=>{
+      let degree;
+      if(i===0) degree=0;
+      else if(i===7||i===15) degree=Math.random()<.7?0:3;
+      else degree=scale[Math.floor(Math.random()*scale.length)];
+      return 48+degree+(Math.random()<.3?12:0);
+    });
+    step=0;
+  }
+  function updateMood(next){
+    mood=next;
+    document.querySelectorAll(".mood").forEach(b=>b.classList.toggle("active",b.dataset.mood===mood));
+    $("message").textContent=moodData[mood].msg;
+    $("track").textContent=moodData[mood].title;
+    $("description").textContent=moodData[mood].desc;
+    makeMelody();
+    if(playing) restartLoop();
+  }
+  document.querySelectorAll(".mood").forEach(b=>b.addEventListener("click",()=>updateMood(b.dataset.mood)));
+  function ensureAudio(){
+    if(!audio){
+      const AC=window.AudioContext||window.webkitAudioContext;
+      if(!AC) throw new Error("Browser ini belum mendukung Web Audio API.");
+      audio=new AC(); master=audio.createGain(); master.gain.value=Number($("volume").value); master.connect(audio.destination);
+    }
+    if(audio.state==="suspended") audio.resume();
+  }
+  function note(freq,duration,when,kind=0,volume=1){
+    const osc=audio.createOscillator(), gain=audio.createGain(), filter=audio.createBiquadFilter();
+    osc.type=kind===0?"sine":kind===1?"triangle":"sine";
+    osc.frequency.setValueAtTime(freq,when);
+    if(kind===2) osc.frequency.exponentialRampToValueAtTime(freq*.985,when+duration);
+    filter.type="lowpass"; filter.frequency.value=kind===1?1800:1200;
+    gain.gain.setValueAtTime(.0001,when);
+    gain.gain.exponentialRampToValueAtTime(.12*volume,when+.025);
+    gain.gain.exponentialRampToValueAtTime(.0001,when+duration);
+    osc.connect(filter);filter.connect(gain);gain.connect(master);
+    osc.start(when);osc.stop(when+duration+.03);
+  }
+  function playStep(){
+    if(!playing||!audio)return;
+    const now=audio.currentTime, midi=melody[step%melody.length];
+    const freq=440*Math.pow(2,(midi-69)/12);
+    note(freq,.75,now,instrument,.9);
+    if(step%4===0){
+      const root=440*Math.pow(2,((midi-12)-69)/12);
+      note(root,.95,now,1,.55);
+      note(root*1.5,.8,now+.015,0,.18);
+    }
+    if(step%2===1) note(freq*2,.25,now+.18,0,.13);
+    step++;
+  }
+  function startLoop(){
+    ensureAudio();playing=true;step=0;playStep();
+    timer=setInterval(playStep,60000/moodData[mood].tempo);
+    $("play").textContent="Ⅱ";$("play").setAttribute("aria-label","Jeda");
+    $("audioStatus").textContent="Sedang memainkan melodi original untuk suasana "+mood+".";
+  }
+  function stopLoop(){
+    playing=false;if(timer)clearInterval(timer);timer=null;
+    $("play").textContent="▶";$("play").setAttribute("aria-label","Putar");
+    $("audioStatus").textContent="Dijeda. Kamu bisa lanjut kapan saja.";
+  }
+  function restartLoop(){if(playing){stopLoop();startLoop();}}
+  $("play").addEventListener("click",()=>{
+    try{if(playing)stopLoop();else startLoop();}
+    catch(e){$("audioStatus").textContent=e.message;}
+  });
+  $("newMelody").addEventListener("click",()=>{
+    makeMelody();
+    $("audioStatus").textContent="Melodi baru sudah dibuat.";
+    if(playing)restartLoop();
+  });
+  $("tone").addEventListener("click",()=>{
+    instrument=(instrument+1)%3;
+    $("audioStatus").textContent=["Suara piano lembut dipilih.","Suara nada segitiga yang hangat dipilih.","Suara ambient halus dipilih."][instrument];
+    if(playing)restartLoop();
+  });
+  $("volume").addEventListener("input",e=>{if(master)master.gain.setTargetAtTime(Number(e.target.value),audio.currentTime,.04);});
+  const reminders=[
+    "Kamu nggak perlu membandingkan prosesmu dengan siapa pun. Pelan-pelan juga tetap bergerak.",
+    "Jangan memaksa diri mendapat jawaban dari orang lain saat hatimu sendiri masih butuh didengar.",
+    "Perasaanmu valid, tapi kamu tetap boleh memilih tindakan yang menjaga dirimu dan orang lain.",
+    "Kalau seseorang baru melewati perpisahan, beri dia ruang. Kedekatan yang sehat tumbuh tanpa terburu-buru.",
+    "Malam ini cukup lakukan satu hal baik untuk dirimu: minum air, istirahat, atau cerita ke orang yang kamu percaya."
+  ];
+  $("reflect").addEventListener("click",()=>{
+    const val=$("thought").value.trim();
+    const line=reminders[Math.floor(Math.random()*reminders.length)];
+    $("reflection").textContent=val?"Terima kasih sudah jujur pada diri sendiri. "+line:line;
+  });
+  $("clear").addEventListener("click",()=>{$("thought").value="";$("reflection").textContent="Catatan di halaman ini sudah dikosongkan.";});
+  makeMelody();
+  window.addEventListener("pagehide",()=>{if(timer)clearInterval(timer);if(audio)audio.close();});
+})();
+</script>
+</body>
+</html>
